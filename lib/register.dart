@@ -78,6 +78,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
       final user = userCredential.user;
       if (user != null) {
+        // Send verification email
+        await user.sendEmailVerification();
+
         String? userImageUrl;
         String? shopImageUrl;
 
@@ -95,13 +98,11 @@ class _RegisterPageState extends State<RegisterPage> {
           'userImageUrl': userImageUrl,
           'shopImageUrl': shopImageUrl,
           'createdAt': FieldValue.serverTimestamp(),
+          'emailVerified': false,
         });
 
         if (mounted) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const SignInPage()),
-          );
+          _showEmailVerificationDialog();
         }
       }
     } on FirebaseAuthException catch (e) {
@@ -197,6 +198,32 @@ class _RegisterPageState extends State<RegisterPage> {
         SnackBar(content: Text(message)),
       );
     }
+  }
+
+  void _showEmailVerificationDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: const Text('Verify Your Email'),
+        content: const Text(
+          'A verification email has been sent to your email address. '
+          'Please verify your email before signing in.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const SignInPage()),
+              );
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override

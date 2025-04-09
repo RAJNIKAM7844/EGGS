@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:testapp/home.dart' as home;
+import 'package:testapp/home.dart';
 import 'package:testapp/register.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Roboto',
         primarySwatch: Colors.orange,
       ),
-      home: RegisterPage(), // Starting with onboarding page
+      home: home.HomePage(), // Starting with onboarding page
     );
   }
 }
@@ -203,7 +205,7 @@ class PageFour extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
             child: Image.asset('assets/image4.png', fit: BoxFit.cover),
           ),
           const Padding(
