@@ -232,134 +232,133 @@ class _RegisterPageState extends State<RegisterPage> {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () => Navigator.pop(context),
-              ),
-              const SizedBox(height: 5),
-              const Text(
-                "Register Now",
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-              const Text(
-                "Sign up with email and password and all fields to continue",
-                style: TextStyle(fontSize: 14, color: Colors.grey),
-              ),
-              const SizedBox(height: 10),
-              buildTextField(Icons.person, "Full Name",
-                  controller: _nameController),
-              buildTextField(Icons.email, "Email Address",
-                  controller: _emailController),
-              buildTextField(Icons.lock, "Password",
-                  obscureText: true, controller: _passwordController),
-              buildTextField(Icons.lock, "Confirm Password",
-                  obscureText: true, controller: _confirmPasswordController),
-              const SizedBox(height: 10),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.location_on, color: Colors.grey),
-                  hintText: "Select Location",
-                  hintStyle: const TextStyle(color: Colors.grey),
-                  border: InputBorder.none,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  fillColor: Colors.grey[200],
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 5),
+                const Text(
+                  "Register Now",
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
-                value: selectedLocation,
-                items: locations
-                    .map((location) => DropdownMenuItem(
-                          value: location,
-                          child: Text(location),
-                        ))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() => selectedLocation = value);
-                },
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  imageCircle(userImage, Icons.person, true),
-                  const SizedBox(width: 20),
-                  imageCircle(shopImage, Icons.store, false),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  Checkbox(
-                    value: isChecked,
-                    onChanged: (value) {
-                      setState(() => isChecked = value ?? false);
-                    },
+                const Text(
+                  "Sign up with email and password and all fields to continue",
+                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                ),
+                const SizedBox(height: 10),
+                buildTextField(Icons.person, "Full Name",
+                    controller: _nameController),
+                buildTextField(Icons.email, "Email Address",
+                    controller: _emailController),
+                buildTextField(Icons.lock, "Password",
+                    obscureText: true, controller: _passwordController),
+                buildTextField(Icons.lock, "Confirm Password",
+                    obscureText: true, controller: _confirmPasswordController),
+                const SizedBox(height: 10),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    prefixIcon:
+                        const Icon(Icons.location_on, color: Colors.grey),
+                    hintText: "Select Location",
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    border: InputBorder.none,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[200],
                   ),
-                  GestureDetector(
-                    onTap: showTermsDialog,
-                    child: const Text(
-                      "Click Here to Accept Terms & Conditions",
-                      style: TextStyle(color: Colors.red),
+                  value: selectedLocation,
+                  items: locations
+                      .map((location) => DropdownMenuItem(
+                            value: location,
+                            child: Text(location),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() => selectedLocation = value);
+                  },
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    imageCircle(userImage, Icons.person, true),
+                    const SizedBox(width: 20),
+                    imageCircle(shopImage, Icons.store, false),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: isChecked,
+                      onChanged: (value) {
+                        setState(() => isChecked = value ?? false);
+                      },
+                    ),
+                    GestureDetector(
+                      onTap: showTermsDialog,
+                      child: const Text(
+                        "Click Here to Accept Terms & Conditions",
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 50),
+                    backgroundColor: Colors.black,
+                  ),
+                  onPressed: _isLoading ? null : _register,
+                  child: _isLoading
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : const Text("Register",
+                          style: TextStyle(color: Colors.white)),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    socialButton("assets/google.png", onTap: _signInWithGoogle),
+                    const SizedBox(width: 20),
+                    socialButton("assets/ios.png"),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Already have an account? ",
+                      style: const TextStyle(color: Colors.black),
+                      children: [
+                        TextSpan(
+                          text: "Sign in",
+                          style: const TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SignInPage()),
+                              );
+                            },
+                        )
+                      ],
                     ),
                   ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  backgroundColor: Colors.black,
                 ),
-                onPressed: _isLoading ? null : _register,
-                child: _isLoading
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text("Register",
-                        style: TextStyle(color: Colors.white)),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  socialButton("assets/google.png", onTap: _signInWithGoogle),
-                  const SizedBox(width: 20),
-                  socialButton("assets/ios.png"),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Center(
-                child: RichText(
-                  text: TextSpan(
-                    text: "Already have an account? ",
-                    style: const TextStyle(color: Colors.black),
-                    children: [
-                      TextSpan(
-                        text: "Sign in",
-                        style: const TextStyle(
-                            color: Colors.red, fontWeight: FontWeight.bold),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignInPage()),
-                            );
-                          },
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

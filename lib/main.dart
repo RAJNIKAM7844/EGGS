@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:testapp/home.dart' as home;
 import 'package:testapp/home.dart';
 import 'package:testapp/register.dart';
+import 'package:testapp/sign.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,10 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Roboto',
         primarySwatch: Colors.orange,
       ),
-      home: home.HomePage(), // Starting with onboarding page
+      home: SignInPage(),
+      routes: {
+        '/signin': (context) => const SignInPage(), // ✅ Add this
+      }, // Starting with onboarding page
     );
   }
 }

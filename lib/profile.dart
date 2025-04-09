@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
 import '../widgets/custom_background.dart'; // Make sure this path is correct
 
 class ProfileScreen extends StatelessWidget {
@@ -73,8 +74,9 @@ class ProfileScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                     ),
-                    onPressed: () {
-                      // TODO: Add your logout logic here
+                    onPressed: () async {
+                      await FirebaseAuth.instance.signOut();
+                      Navigator.pushReplacementNamed(context, '/signin');
                     },
                     child: const Text(
                       "Log Out",

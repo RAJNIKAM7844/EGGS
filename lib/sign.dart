@@ -169,103 +169,102 @@ class _SignInPageState extends State<SignInPage> {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () => Navigator.pop(context),
-              ),
-              const SizedBox(height: 5),
-              const Text("Welcome Back",
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-              const Text("Sign in with your email and password to continue",
-                  style: TextStyle(fontSize: 14, color: Colors.grey)),
-              const SizedBox(height: 20),
-              buildTextField(Icons.email, "Email Address",
-                  controller: _emailController),
-              buildTextField(Icons.lock, "Password",
-                  obscureText: true, controller: _passwordController),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: rememberMe,
-                        onChanged: (value) {
-                          setState(() => rememberMe = value ?? false);
-                        },
-                      ),
-                      const Text("Remember me"),
-                    ],
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ResetPasswordPage()),
-                      );
-                    },
-                    child: const Text("Forgot Password?",
-                        style: TextStyle(color: Colors.red)),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  backgroundColor: Colors.black,
-                ),
-                onPressed: _isLoading ? null : _signIn,
-                child: _isLoading
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text("Sign In",
-                        style: TextStyle(color: Colors.white)),
-              ),
-              const SizedBox(height: 20),
-              const Center(
-                child: Text("Or sign in with",
-                    style: TextStyle(color: Colors.grey)),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  socialButton("assets/google.png", onTap: _signInWithGoogle),
-                  const SizedBox(width: 20),
-                  socialButton("assets/ios.png"),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Center(
-                child: RichText(
-                  text: TextSpan(
-                    text: "Don't have an account? ",
-                    style: const TextStyle(color: Colors.black),
-                    children: [
-                      TextSpan(
-                        text: "Register",
-                        style: const TextStyle(
-                            color: Colors.red, fontWeight: FontWeight.bold),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const RegisterPage()),
-                            );
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 5),
+                const Text("Welcome Back",
+                    style:
+                        TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                const Text("Sign in with your email and password to continue",
+                    style: TextStyle(fontSize: 14, color: Colors.grey)),
+                const SizedBox(height: 20),
+                buildTextField(Icons.email, "Email Address",
+                    controller: _emailController),
+                buildTextField(Icons.lock, "Password",
+                    obscureText: true, controller: _passwordController),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: rememberMe,
+                          onChanged: (value) {
+                            setState(() => rememberMe = value ?? false);
                           },
-                      )
-                    ],
+                        ),
+                        const Text("Remember me"),
+                      ],
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ResetPasswordPage()),
+                        );
+                      },
+                      child: const Text("Forgot Password?",
+                          style: TextStyle(color: Colors.red)),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 50),
+                    backgroundColor: Colors.black,
+                  ),
+                  onPressed: _isLoading ? null : _signIn,
+                  child: _isLoading
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : const Text("Sign In",
+                          style: TextStyle(color: Colors.white)),
+                ),
+                const SizedBox(height: 20),
+                const Center(
+                  child: Text("Or sign in with",
+                      style: TextStyle(color: Colors.grey)),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    socialButton("assets/google.png", onTap: _signInWithGoogle),
+                    const SizedBox(width: 20),
+                    socialButton("assets/ios.png"),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Center(
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Don't have an account? ",
+                      style: const TextStyle(color: Colors.black),
+                      children: [
+                        TextSpan(
+                          text: "Register",
+                          style: const TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const RegisterPage()),
+                              );
+                            },
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
