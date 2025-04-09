@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/about.dart';
 import 'package:testapp/contact.dart';
+import 'package:testapp/first.dart';
 import 'package:testapp/profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,9 +14,9 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = const [
-    Center(child: Text("Home Page", style: TextStyle(fontSize: 24))),
+    FirstPage(),
     ContactUsScreen(),
-    Center(child: Text("People Page", style: TextStyle(fontSize: 24))),
+    AboutPage(),
     ProfileScreen(),
   ];
 
