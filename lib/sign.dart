@@ -72,7 +72,15 @@ class _SignInPageState extends State<SignInPage> {
     setState(() => _isLoading = true);
 
     try {
-      final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
+      final GoogleSignIn googleSignIn = GoogleSignIn(
+        scopes: ['email'],
+        // force account selection
+        signInOption: SignInOption.standard,
+      );
+
+      // Force user to choose an account
+      await googleSignIn.signOut(); // <-- Important to show account picker
+
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser == null) {

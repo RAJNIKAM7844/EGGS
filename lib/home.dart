@@ -5,13 +5,15 @@ import 'package:testapp/first.dart';
 import 'package:testapp/profile.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final int initialIndex;
+  const HomePage({super.key, this.initialIndex = 0});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
 
   final List<Widget> _screens = const [
     FirstPage(),
@@ -19,6 +21,12 @@ class _HomePageState extends State<HomePage> {
     AboutPage(),
     ProfileScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -58,8 +66,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildNavItem(Icons.home_outlined, 0),
-              _buildNavItem(Icons.info_outline, 1),
-              _buildNavItem(Icons.people_outline, 2),
+              _buildNavItem(Icons.people_outline, 1),
+              _buildNavItem(Icons.info_outline, 2),
               _buildNavItem(Icons.person_outline, 3),
             ],
           ),

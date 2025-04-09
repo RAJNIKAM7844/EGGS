@@ -49,7 +49,6 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
               const Align(
                 alignment: Alignment.topRight,
                 child: Padding(
@@ -57,11 +56,11 @@ class ProfileScreen extends StatelessWidget {
                   child: Icon(Icons.edit, size: 20),
                 ),
               ),
-              const SizedBox(height: 10),
               _buildInfoField(icon: Icons.person, text: "John"),
               _buildInfoField(icon: Icons.mail, text: "testuser@gmail.com"),
               _buildInfoField(icon: Icons.location_on, text: "Nayandalli"),
-              const SizedBox(height: 20),
+              _buildInfoField(icon: Icons.phone, text: "+91 1234567890"),
+              SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: SizedBox(

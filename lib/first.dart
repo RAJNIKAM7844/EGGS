@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:testapp/home.dart';
+import 'package:testapp/profile.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({super.key});
@@ -128,10 +130,20 @@ class _FirstPageState extends State<FirstPage> {
                         child: const Text('Credit : ₹0.0',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
-                      const CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: Icon(Icons.person, color: Colors.black),
-                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const HomePage(initialIndex: 3)),
+                          );
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: Icon(Icons.person, color: Colors.black),
+                        ),
+                      )
                     ],
                   ),
                 ),
